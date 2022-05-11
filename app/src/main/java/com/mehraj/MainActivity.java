@@ -1,90 +1,70 @@
 package com.mehraj;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
 
-    EditText et_name,et_phone,et_address;
-    Button submit;
-    TextView display;
-
+   EditText editTextNumber;
+   Button buttonCheck;
+   TextView display;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+     editTextNumber=findViewById(R.id.number);
+     buttonCheck=findViewById(R.id.btn_check);
+     display=findViewById(R.id.display);
 
-        et_name=   findViewById(R.id.et_name);
-        et_phone= findViewById(R.id.et_phone);
-        et_address=findViewById(R.id.et_address);
-        submit=   findViewById(R.id.submit);
-        display=  findViewById(R.id.tv_display);
+    buttonCheck.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if(editTextNumber.getText().toString().isEmpty())
+            {
+                editTextNumber.setError("Required");
 
-
-       // display.setText(et_name.getText().toString());
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                  if( validate())
-                  {
-                     String details="YOUR ENTERED INFORMATION IS\nNAME: "+et_name.getText().toString()+
-                             "\nPHONE: " +et_phone.getText().toString()+
-                              "\nADDRESS: "+et_address.getText().toString();
-
-                     display.setText(details);
-
-
-
-                  }
+                return;
             }
-        });
+
+            Integer number=Integer.parseInt(editTextNumber.getText().toString());
+
+
+            if(number%2==0)
+            {
+                display.setText("You have entered an even number");
+            }else {
+                display.setText("You have entered an odd number");
+            }
+
+
+
+
+        }
+    });
+
+
+
+
+
 
     }
 
 
-    public  boolean validate()
-    {
-        if(et_name.getText().toString().isEmpty())
-        {
-            showToast("Please enter your name");
-            return  false;
-        }
-
-        if(et_phone.getText().toString().isEmpty())
-        {
-            showToast("Please enter your mobile");
-            return  false;
-        }
-
-
-        if(et_phone.getText().toString().length()<10)
-        {
-            showToast("Please enter a valid mobile number");
-            return  false;
-        }
-        if(et_address.getText().toString().isEmpty())
-        {
-            showToast("Please enter your address");
-            return  false;
-        }
-        return  true;
-    }
 
 
 
-    void  showToast(String msg)
-    {
-
-        Toast.makeText(this,msg,Toast.LENGTH_LONG).show();
-    }
 }
