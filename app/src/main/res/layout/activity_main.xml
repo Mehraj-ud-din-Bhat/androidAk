@@ -7,22 +7,28 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="I AM FIRST ACTIVITY"
-        android:textSize="30sp"
-        android:layout_margin="20dp"
-        android:textColor="@color/purple_200"
 
+     <EditText
+         android:id="@+id/name"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:hint="Enter your Name"
+         />
+
+
+    <EditText
+        android:id="@+id/phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter your Phone"
         />
 
-    <Button
-        android:id="@+id/MOVE"
-        android:layout_width="wrap_content"
-        android:text="MOVE TO SECOND SCREEN"
-        android:layout_gravity="center"
 
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:text="Submit"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"/>
 
 
