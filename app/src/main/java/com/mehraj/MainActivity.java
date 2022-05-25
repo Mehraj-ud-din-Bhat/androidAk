@@ -2,6 +2,8 @@ package com.mehraj;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Build;
@@ -20,13 +22,17 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-     Button submit;
-     EditText name,phone;
+      RecyclerView rvStudents;
+      StudentAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        rvStudents=findViewById(R.id.rv_students);
+        adapter=new StudentAdapter();
+        rvStudents.setAdapter(adapter);
+        rvStudents.setLayoutManager(new LinearLayoutManager(this));
 
 
 
