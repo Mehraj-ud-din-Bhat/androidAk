@@ -12,18 +12,13 @@ import java.util.ArrayList;
 
 public class StudentAdapter  extends RecyclerView.Adapter<StudentAdapter.StudentViewHolder> {
 
-      ArrayList<String> studentNames;
+      ArrayList<Student> students;
 
     public StudentAdapter() {
-        this.studentNames=new ArrayList<>();
-        studentNames.add("MEHRAJ");
-        studentNames.add("AKIRA");
-        studentNames.add("LOUIS");
-        studentNames.add("BEN");
-        studentNames.add("JOHN");
-        studentNames.add("BEN");
-        studentNames.add("JOHN");        studentNames.add("BEN");
-        studentNames.add("JOHN");
+        this.students=new ArrayList<>();
+        students.add(new Student("MEHRAJ","8494036469","MCA"));
+        students.add(new Student("AKIRA","990638383","9th"));
+        students.add(new Student("Naseer","990638383","Btech"));
     }
 
     @NonNull
@@ -37,20 +32,27 @@ public class StudentAdapter  extends RecyclerView.Adapter<StudentAdapter.Student
 
     @Override
     public void onBindViewHolder(@NonNull StudentViewHolder holder, int position) {
-      holder.name.setText(studentNames.get(position));
+      holder.name.setText(students.get(position).name);
+      holder.studentClass.setText(students.get(position).studentClass);
+      holder.studentPhone.setText(students.get(position).phone);
     }
 
     @Override
     public int getItemCount() {
-        return  studentNames.size();
+        // CHECKS HOW MANY VIEWS  IT NEEDS TO CREATE
+        return  students.size();
     }
 
 
     class  StudentViewHolder extends RecyclerView.ViewHolder{
          TextView name;
+         TextView studentClass;
+         TextView studentPhone;
         public StudentViewHolder(@NonNull View itemView) {
             super(itemView);
             name=itemView.findViewById(R.id.studentName);
+            studentClass=itemView.findViewById(R.id.studentClass);
+            studentPhone=itemView.findViewById(R.id.studentPhone);
         }
     }
 
