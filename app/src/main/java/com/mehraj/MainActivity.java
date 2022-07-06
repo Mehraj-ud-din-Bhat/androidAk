@@ -1,90 +1,73 @@
 package com.mehraj;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
-    EditText et_name,et_phone,et_address;
-    Button submit;
-    TextView display;
+     ImageView addTask;
+     TextView toolBarTitle;
+     RecyclerView taskList;
+
+  public  static    ArrayList<Task> taskArrayList= new ArrayList<>();
+ static TaskAdapter taskAdapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        addTask=findViewById(R.id.actionIcon);
+        taskList=findViewById(R.id.rv_taskList);
+        initAdapter();
 
-
-        et_name=   findViewById(R.id.et_name);
-        et_phone= findViewById(R.id.et_phone);
-        et_address=findViewById(R.id.et_address);
-        submit=   findViewById(R.id.submit);
-        display=  findViewById(R.id.tv_display);
-
-
-       // display.setText(et_name.getText().toString());
-        submit.setOnClickListener(new View.OnClickListener() {
+        addTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, AddTask.class));
 
-                  if( validate())
-                  {
-                     String details="YOUR ENTERED INFORMATION IS\nNAME: "+et_name.getText().toString()+
-                             "\nPHONE: " +et_phone.getText().toString()+
-                              "\nADDRESS: "+et_address.getText().toString();
-
-                     display.setText(details);
-
-
-
-                  }
             }
         });
 
+
+
+
     }
 
 
-    public  boolean validate()
+    public  void  initAdapter(){
+       taskAdapter= new TaskAdapter(taskArrayList,this);
+       taskList.setLayoutManager(new LinearLayoutManager(this));
+       taskList.setAdapter(taskAdapter);
+    }
+
+
+    public  static  void  addTask(Task task)
     {
-        if(et_name.getText().toString().isEmpty())
-        {
-            showToast("Please enter your name");
-            return  false;
-        }
-
-        if(et_phone.getText().toString().isEmpty())
-        {
-            showToast("Please enter your mobile");
-            return  false;
-        }
+        taskArrayList.add(task);
+        /***
+         *
+         *
+         * Refresh the adapter
+         */
+        taskAdapter.notifyDataSetChanged();
 
 
-        if(et_phone.getText().toString().length()<10)
-        {
-            showToast("Please enter a valid mobile number");
-            return  false;
-        }
-        if(et_address.getText().toString().isEmpty())
-        {
-            showToast("Please enter your address");
-            return  false;
-        }
-        return  true;
     }
 
 
 
-    void  showToast(String msg)
-    {
-
-        Toast.makeText(this,msg,Toast.LENGTH_LONG).show();
-    }
 }
