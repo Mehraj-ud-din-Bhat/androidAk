@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         rvStudents=findViewById(R.id.rv_students);
-        adapter=new StudentAdapter();
+        adapter=new StudentAdapter(this);
         rvStudents.setAdapter(adapter);
         rvStudents.setLayoutManager(new LinearLayoutManager(this));
 
